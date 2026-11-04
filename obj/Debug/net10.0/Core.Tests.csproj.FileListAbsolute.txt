@@ -257,3 +257,4 @@ C:\Users\хуй\Projects\NKS Software\Prometeus\Core.Tests\obj\Debug\net10.0\Cor
 C:\Users\хуй\Projects\NKS Software\Prometeus\Core.Tests\obj\Debug\net10.0\refint\Core.Tests.dll
 C:\Users\хуй\Projects\NKS Software\Prometeus\Core.Tests\obj\Debug\net10.0\Core.Tests.pdb
 C:\Users\хуй\Projects\NKS Software\Prometeus\Core.Tests\obj\Debug\net10.0\ref\Core.Tests.dll
+C:\Users\хуй\Projects\NKS Software\Prometeus\Core.Tests\obj\Debug\net10.0\Core.Tests.sourcelink.json
