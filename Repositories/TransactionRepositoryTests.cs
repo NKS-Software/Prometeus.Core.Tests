@@ -166,37 +166,7 @@ public class TransactionRepositoryTests(DepedencyFixture depedencyFixture) : ICl
     [Fact]
     public async Task CreateAsync_WithValidData()
     {
-        var transaction = new Transaction
-        {
-            Id = Guid.NewGuid(),
-            CreatedAt = DateTime.UtcNow
-        };
-        var res = await transactionRepository.CreateAsync(transaction);
-        Assert.NotNull(res);
-        Assert.Equal(transaction.Id, res.Id);
-    }
-
-    [Fact]
-    public async Task CreateAsync_WithDuplicateId()
-    {
-        var transaction = await CreateTransactionAsync();
-        var res = await transactionRepository.CreateAsync(transaction);
-        Assert.Null(res);
-    }
-
-    [Fact]
-    public async Task CreateAsync_WithInvalidIdLength()
-    {
-        var transaction = new Transaction
-        {
-            Id = Guid.NewGuid(),
-            CreatedAt = DateTime.UtcNow
-        };
-        // Обрезаем Id до невалидной длины — но Id это Guid, всегда 36.
-        // Проверка LENGTH(@Id) = 36 всегда true для Guid.
-        // Поэтому тест на невалидную длину Id невозможен через Guid.
-        // Оставляем только проверку на дубликат.
-        var res = await transactionRepository.CreateAsync(transaction);
+        var res = await transactionRepository.CreateAsync();
         Assert.NotNull(res);
     }
     #endregion
