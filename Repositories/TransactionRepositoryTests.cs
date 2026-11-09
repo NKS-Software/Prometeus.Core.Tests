@@ -178,7 +178,6 @@ public class TransactionRepositoryTests(DepedencyFixture depedencyFixture) : ICl
         var transaction = await CreateTransactionAsync();
         var entry = new TransactionEntry
         {
-            Id = Guid.NewGuid(),
             TransactionId = transaction.Id,
             AccountNumber = await CreateAccountAsync(),
             Amount = 1000,
@@ -186,7 +185,6 @@ public class TransactionRepositoryTests(DepedencyFixture depedencyFixture) : ICl
         };
         var res = await transactionRepository.CreateEntryAsync(entry);
         Assert.NotNull(res);
-        Assert.Equal(entry.Id, res.Id);
     }
 
     [Fact]
@@ -270,23 +268,6 @@ public class TransactionRepositoryTests(DepedencyFixture depedencyFixture) : ICl
             Type = EntryType.Source
         };
         var res = await transactionRepository.CreateEntryAsync(entry);
-        Assert.Null(res);
-    }
-
-    [Fact]
-    public async Task CreateEntryAsync_WithDuplicateId()
-    {
-        var transaction = await CreateTransactionAsync();
-        var entry = await CreateEntryAsync(transaction.Id, EntryType.Source, 1000);
-        var duplicate = new TransactionEntry
-        {
-            Id = entry.Id,
-            TransactionId = transaction.Id,
-            AccountNumber = await CreateAccountAsync(),
-            Amount = 500,
-            Type = EntryType.Destination
-        };
-        var res = await transactionRepository.CreateEntryAsync(duplicate);
         Assert.Null(res);
     }
     #endregion
@@ -613,12 +594,7 @@ public class TransactionRepositoryTests(DepedencyFixture depedencyFixture) : ICl
     #region Utils
     private async Task<Transaction> CreateTransactionAsync()
     {
-        var transaction = new Transaction
-        {
-            Id = Guid.NewGuid(),
-            CreatedAt = DateTime.UtcNow
-        };
-        var res = await transactionRepository.CreateAsync(transaction);
+        var res = await transactionRepository.CreateAsync();
         Assert.NotNull(res);
         return res;
     }
